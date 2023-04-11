@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import filedialog
+from tkinter import messagebox
 from pdf2docx import Converter
 import os
 
@@ -29,11 +30,11 @@ def convertir_PDF_to_WORD():
             converter.convert(fichier_word)
             converter.close()
 
-            label_resultat.config(text="Conversion réussie")
+            messagebox.showinfo("", "Conversion réussie", parent=root)
         except Exception as e:
-            label_resultat.config(text=f"Erreur : {str(e)}")
+            messagebox.showierror("Erreur", "Coversion échouée!", parent=root)
     else:
-        label_resultat.config(text="Veuillez selectionner un fichier PDF")
+        messagebox.showerror("Erreur", "Selectionner un fichier PDF SVP!", parent=root)
 
 
 # Interface Graphique
@@ -41,6 +42,8 @@ def convertir_PDF_to_WORD():
 root = tk.Tk()
 root.title("Convertir PDF en WORD")
 root.geometry("600x250")
+root.iconbitmap("C:\\Users\\nassi\\PycharmProjects\\PDF_to_WORD\\icon1.ico")
+root.resizable(width=False, height=False)
 
 label_fichier_PDF = tk.Label(root, text="Selectionner le fichier PDF")
 label_fichier_PDF.grid(row=0, column=0, padx=5, pady=10)
@@ -63,8 +66,8 @@ button_fichier_WORD.grid(row=1, column=2, padx=5, pady=10)
 button_convertir = tk.Button(root, text= "Convertir", command=convertir_PDF_to_WORD)
 button_convertir.grid(row=2, column=1, padx=5, pady=10)
 
-label_resultat = tk.Label(root, text="")
-label_resultat.grid(row=3, column=1)
+#label_resultat = tk.Label(root, text="")
+#label_resultat.grid(row=3, column=1)
 
 
 
